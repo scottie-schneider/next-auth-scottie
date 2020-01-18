@@ -17,7 +17,6 @@ const Home = () => (
         To get started, edit <code>pages/index.js</code> and save to reload.
       </p>
 
-      {process.env.FIREBASE_API_KEY}
     </div>
 
     <style jsx>{`
