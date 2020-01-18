@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-
+import { doSignOut } from '../firebase/auth';
 const links = [
   { href: 'https://zeit.co/now', label: 'ZEIT' },
   { href: 'https://github.com/zeit/next.js', label: 'GitHub' }
@@ -16,6 +16,7 @@ const Nav = () => (
         <Link href='/'>
           <a>Home</a>
         </Link>
+        <button onClick={() => doSignOut()}>Sign out!</button>
       </li>
       {links.map(({ key, href, label }) => (
         <li key={key}>

@@ -1,9 +1,9 @@
 import { db } from './firebase';
 
 export const doCreateUser = (
-  id: string,
-  username: string,
-  email: string
+  id,
+  username,
+  email
 ) =>
   db.ref(`users/${id}`).set({
     username,

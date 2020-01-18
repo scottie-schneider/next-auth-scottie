@@ -2,7 +2,7 @@
 
 import React from 'react';
 import NextApp from 'next/app';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import { auth } from '../firebase/firebase';
@@ -91,21 +91,24 @@ const MyComponent = ({ children }) => {
     <ThemeProvider theme={theme}>
       <SessionContext.Provider value={session}>
         <GlobalStyle />
-        {/* Add in head */}
-        {React.cloneElement(children, { key: router.route })}
+        {/* Add in head */}        
+        
+        {session.authUser ? 
+          React.cloneElement(children, { key: router.route }) 
+          : 
+          <button onClick={() => auth.signInWithEmailAndPassword('scott@warcat.co', "password")}>Sign in</button>
+        }
       </SessionContext.Provider>
     </ThemeProvider>
   );
 };
 
-export default class MyApp extends NextApp {
-  render() {
-    const { Component, pageProps } = this.props;
-
-    return (
-      <MyComponent>
-        <Component {...pageProps} />
-      </MyComponent>
-    );
-  }
+const MyApp = ({ Component, pageProps }) => {
+  return (
+    <MyComponent>
+      <Component {...pageProps} />
+    </MyComponent>
+  )
 }
+
+export default MyApp;
